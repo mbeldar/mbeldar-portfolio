@@ -1,0 +1,59 @@
+/* App.css */
+.App {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; /* Left column, center space, right column */
+  grid-template-rows: auto 1fr; /* Top row for title, remaining for content */
+  gap: 20px; /* Spacing between components */
+  height: 100vh;
+  align-items: center;
+}
+
+.App-header {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 24px;
+  color: #ffffff;
+}
+
+
+.title {
+  grid-column: 1 / 4; /* Spanning across all 3 columns */
+  text-align: center;
+  font-size: 3em;
+  color: var(--pastel-blue); /* You can adjust this */
+}
+
+.intro-text {
+  grid-column: 1 / 2; /* Placing it in the left column */
+  grid-row: 2; /* Second row (below title) */
+  padding: 20px;
+  font-size: 1.2em;
+  color: var(--text-color);
+}
+
+.profile {
+  grid-column: 3 / 4; /* Placing it in the right column */
+  grid-row: 2; /* Second row (below title) */
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  /* Responsive design for smaller screens */
+  .App {
+    grid-template-columns: 1fr; /* Collapse into one column */
+    grid-template-rows: auto auto auto;
+    gap: 10px;
+  }
+  
+  .profile {
+    grid-column: 1 / 2;
+  }
+
+  .intro-text {
+    grid-column: 1 / 2;
+  }
+
+  .title {
+    grid-column: 1 / 2;
+  }
+}

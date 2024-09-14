@@ -1,0 +1,22 @@
+/* ProfilePicture.css */
+.profile-picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .profile-image {
+    width: 200px; /* Adjust size as needed */
+    height: 200px;
+    border-radius: 50%; /* Rounds the edges */
+    border: 0px solid var(--pastel-green); /* Adds a pastel pink border */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
+    transition: transform 0.3s ease-in-out, box-shadow 0.1s ease-in-out;
+  }
+  
+  .profile-image:hover {
+    transform: scale(1.02); /* Slightly enlarges the image on hover */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4); /* Increases the shadow on hover */
+  }
+  

@@ -1,0 +1,53 @@
+:root {
+    --pastel-pink: #FFD1DC;
+    --pastel-white: #5a5a5a;
+    --pastel-blue: #AEC6CF;
+    --pastel-green: #28d028;
+    --pastel-yellow: #FFB347;
+    --pastel-lavender: #CBAACB;
+  
+    --background-color: #000; /* Black background */
+    --text-color: #FFFFFF; /* White text for contrast */
+  }
+  
+  body {
+    background-color: var(--background-color); /* Apply black background */
+    color: var(--text-color); /* Use white text */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .pastel-button {
+    background-color: var(--pastel-pink);
+    border: none;
+    border-radius: 5px;
+    color: black; /* Ensure readable text on pastel buttons */
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .pastel-button:hover {
+    background-color: var(--pastel-blue);
+  }
+  
+  .pastel-card {
+    background-color: var(--pastel-lavender);
+    border-radius: 10px;
+    padding: 20px;
+    color: black; /* Dark text for good contrast */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Darker shadow on black background */
+  }
+  
+  .social {
+    text-align: left;
+    font-size: 1.2em;
+    padding: 20px;
+    color: var(--pastel-white);
+  }
+  
+  .social:hover {
+    transform: scale(1.01); /* Slightly enlarges the image on hover */
+  }
+  
