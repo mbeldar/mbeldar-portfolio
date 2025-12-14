@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../assets/css/Pastel.css';
 import './Nond.css';
 import appImg from '../assets/app.png';
@@ -27,6 +28,7 @@ const Nond: React.FC = () => {
           </ul>
 
           <p className="nond-cta">Download Nond on the App Store today and revolutionize your kitchen!</p>
+          <p className="nond-legal-link">Learn more: <Link to="/nond/legal">Legal & Disclaimer</Link></p>
         </div>
 
         <div className="nond-image">

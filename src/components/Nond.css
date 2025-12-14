@@ -39,6 +39,9 @@
   box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 }
 
+.nond-legal-link { margin-top: 12px; }
+.nond-legal-link a { color: #ffeedd; text-decoration: underline; }
+
 @media (max-width: 800px) {
   .nond-hero { flex-direction: column-reverse; text-align: center; }
   .nond-image img { width: 220px; }

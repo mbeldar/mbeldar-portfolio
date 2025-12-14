@@ -6,6 +6,7 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nond from './components/Nond';
+import Legal from './components/Legal';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,6 +17,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/nond" element={<Nond />} />
+        <Route path="/nond/legal" element={<Legal />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

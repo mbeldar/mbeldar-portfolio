@@ -1,0 +1,11 @@
+.legal-root { padding: 36px 20px; color: var(--white); }
+.legal-container { max-width: 900px; margin: 0 auto; line-height: 1.6; }
+.legal-container h1 { font-size: 1.8rem; margin-bottom: 8px; }
+.legal-container h2 { font-size: 1.05rem; margin-top: 18px; }
+.legal-lead { margin-bottom: 16px; }
+.legal-note { margin-top: 22px; font-size: 0.9rem; color: rgba(255,255,255,0.8); }
+
+@media (max-width: 800px) {
+  .legal-container { padding: 0 6px; }
+  .legal-container h1 { font-size: 1.4rem; }
+}
