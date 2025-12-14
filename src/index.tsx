@@ -4,13 +4,20 @@ import './index.css';
 import './assets/css/Pastel.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Nond from './components/Nond';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/nond" element={<Nond />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
