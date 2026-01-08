@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../assets/css/Pastel.css';
 import './Legal.css';
 
 const Legal: React.FC = () => {
+  useEffect(() => {
+    document.title = 'Nond';
+  }, []);
   return (
     <div className="legal-root">
       <div className="legal-container">

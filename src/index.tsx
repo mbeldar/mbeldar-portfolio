@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Nond from './components/Nond';
 import Legal from './components/Legal';
+import Support from './components/Support';
 import Privacy from './components/Privacy';
 
 const root = ReactDOM.createRoot(
@@ -18,6 +19,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/nond" element={<Nond />} />
+        <Route path="/nond/support" element={<Support />} />
         <Route path="/nond/legal" element={<Legal />} />
         <Route path="/privacy" element={<Privacy />} />
       </Routes>
