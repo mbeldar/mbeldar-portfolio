@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import '../assets/css/GlobalBackground.css';
+import FloatingBlobs from './FloatingBlobs';
 
 const PageLayout: React.FC = () => {
   return (
@@ -9,11 +10,7 @@ const PageLayout: React.FC = () => {
         <Outlet />
       </div>
 
-      <div className="floating-blobs" aria-hidden>
-        <div className="blob b1" />
-        <div className="blob b2" />
-        <div className="blob b3" />
-      </div>
+      <FloatingBlobs />
     </div>
   );
 };

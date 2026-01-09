@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../assets/css/Pastel.css';
 import './Nond.css';
 import appImg from '../assets/app.png';
+import appBadge from '../assets/available-on-the-app-store.svg';
 
 const Nond: React.FC = () => {
   useEffect(() => {
@@ -43,6 +44,17 @@ const Nond: React.FC = () => {
 
         <div className="nond-image">
           <img src={appImg} alt="Nond app preview" />
+          <div className="nond-store" aria-hidden>
+            <a
+              className="nond-store-link"
+              href="https://apps.apple.com/us/app/nond-recipe-grocery-planner/id6757132886"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Nond on the App Store (opens in a new tab)"
+            >
+              <img src={appBadge} alt="Available on the App Store" />
+            </a>
+          </div>
         </div>
       </div>
     </div>

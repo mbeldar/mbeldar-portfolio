@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/css/RootLanding.css';
+import FloatingBlobs from './FloatingBlobs';
 
 const RootLanding: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ const RootLanding: React.FC = () => {
         <div className="apps">
           <Link to="/nond" className="app-card">
             <div className="app-title">Nond</div>
-            <div className="app-desc">Open the Nond app. An iOS App.</div>
+            <div className="app-desc">Open the Nond - An iOS App.</div>
           </Link>
 
           <Link to="/profile" className="app-card secondary">
@@ -22,11 +23,7 @@ const RootLanding: React.FC = () => {
         </div>
       </div>
 
-      <div className="floating-blobs" aria-hidden>
-        <div className="blob b1" />
-        <div className="blob b2" />
-        <div className="blob b3" />
-      </div>
+      <FloatingBlobs />
     </div>
   );
 };

@@ -17,11 +17,56 @@
   min-height:100vh;
 }
 .floating-blobs{ position:absolute; inset:0; z-index:1; pointer-events:none; }
-.blob{ position:absolute; border-radius:50%; filter: blur(40px); opacity:0.7; animation:float 8s ease-in-out infinite; }
-.b1{ width:360px; height:360px; left:-12%; top:10%; background:radial-gradient(circle at 30% 30%, #7c3aed, transparent 40%); }
-.b2{ width:260px; height:260px; right:-8%; top:30%; background:radial-gradient(circle at 30% 30%, #06b6d4, transparent 40%); animation-duration:10s; }
-.b3{ width:420px; height:420px; left:10%; bottom:-12%; background:radial-gradient(circle at 30% 30%, #f97316, transparent 30%); animation-duration:12s; }
-@keyframes float{ 0%{ transform:translateY(0) } 50%{ transform:translateY(-24px) } 100%{ transform:translateY(0) } }
+.blob{
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(48px);
+  opacity: 0.7;
+  pointer-events: none;
+  --move-x: 40px;
+  --move-y: 24px;
+  animation-name: float;
+  animation-duration: 8s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: transform, opacity;
+}
+.b1{
+  width:360px; height:360px; left:-12%; top:10%;
+  background:radial-gradient(circle at 30% 30%, #7c3aed, transparent 40%);
+  --move-x: 80px; --move-y: 48px;
+  animation-duration:14s; animation-delay:0s;
+}
+.b2{
+  width:260px; height:260px; right:-8%; top:30%;
+  background:radial-gradient(circle at 30% 30%, #06b6d4, transparent 40%);
+  --move-x: 60px; --move-y: 36px;
+  animation-duration:10s; animation-delay:2s;
+}
+.b3{
+  width:420px; height:420px; left:10%; bottom:-12%;
+  background:radial-gradient(circle at 30% 30%, #f97316, transparent 30%);
+  --move-x: 100px; --move-y: 60px;
+  animation-duration:18s; animation-delay:1s;
+}
+/* Additional blobs (fallback positions/colors) */
+.b4{ width:200px; height:200px; right:12%; top:6%; background:radial-gradient(circle at 30% 30%, #ef4444, transparent 40%); }
+.b5{ width:320px; height:320px; left:28%; top:4%; background:radial-gradient(circle at 30% 30%, #10b981, transparent 40%); }
+.b6{ width:140px; height:140px; right:20%; bottom:20%; background:radial-gradient(circle at 30% 30%, #8b5cf6, transparent 40%); }
+.b7{ width:240px; height:240px; left:-6%; top:50%; background:radial-gradient(circle at 30% 30%, #06b6d4, transparent 40%); }
+.b8{ width:180px; height:180px; right:36%; top:40%; background:radial-gradient(circle at 30% 30%, #fb7185, transparent 40%); }
+.b9{ width:300px; height:300px; left:50%; bottom:-8%; background:radial-gradient(circle at 30% 30%, #f59e0b, transparent 40%); }
+
+/* When JS is controlling motion, disable the CSS float animation to avoid conflicts */
+.blob.js-animated{ animation: none !important; }
+@keyframes float{
+  0%{ transform:translate3d(0,0,0) scale(1); opacity:0.76 }
+  25%{ transform:translate3d(calc(var(--move-x) * 0.6), calc(var(--move-y) * -0.4), 0) scale(1.02); }
+  50%{ transform:translate3d(calc(var(--move-x) * -0.7), calc(var(--move-y) * 0.5), 0) scale(0.98); opacity:0.65 }
+  75%{ transform:translate3d(calc(var(--move-x) * 0.4), calc(var(--move-y) * 0.7), 0) scale(1.01); }
+  100%{ transform:translate3d(0,0,0) scale(1); opacity:0.7 }
+}
 
 /* Make sure links and cards keep good contrast */
 .page-layout a{ color:inherit; }

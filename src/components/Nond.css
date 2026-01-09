@@ -42,6 +42,23 @@
 .nond-legal-link { margin-top: 12px; }
 .nond-legal-link a { color: #ffeedd; text-decoration: underline; }
 
+.nond-image { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.nond-store { margin-top: 6px; }
+.nond-store-link { display: inline-block; border-radius: 10px; overflow: visible; }
+.nond-store-link img { width: 220px; height: auto; display: block; filter: drop-shadow(0 10px 24px rgba(0,0,0,0.35)); transition: transform 260ms cubic-bezier(.2,.9,.3,1), filter 260ms, opacity 320ms; opacity: 0; transform: translateY(8px); animation: badgeIn 560ms cubic-bezier(.2,.9,.3,1) 120ms forwards; }
+.nond-store-link:hover img, .nond-store-link:focus img { transform: translateY(-8px) scale(1.02); filter: drop-shadow(0 18px 36px rgba(0,0,0,0.45)); }
+.nond-store-link:active img { transform: translateY(-3px) scale(0.995); }
+.nond-store-link:focus { outline: 3px solid rgba(124,58,237,0.18); outline-offset: 6px; border-radius: 8px; }
+
+@keyframes badgeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 800px) {
+  .nond-image { gap: 10px; }
+  .nond-store-link img { width: 180px; }
+}
+
 @media (max-width: 800px) {
   .nond-hero { flex-direction: column-reverse; text-align: center; }
   .nond-image img { width: 220px; }
