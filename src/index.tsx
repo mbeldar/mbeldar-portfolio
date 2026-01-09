@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import './assets/css/Pastel.css';
 import App from './components/App';
+import RootLanding from './components/RootLanding';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PageLayout from './components/PageLayout';
 import Nond from './components/Nond';
 import Legal from './components/Legal';
 import Support from './components/Support';
@@ -17,11 +19,14 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/nond" element={<Nond />} />
-        <Route path="/nond/support" element={<Support />} />
-        <Route path="/nond/legal" element={<Legal />} />
-        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/" element={<PageLayout />}>
+          <Route index element={<RootLanding />} />
+          <Route path="profile" element={<App />} />
+          <Route path="nond" element={<Nond />} />
+          <Route path="nond/support" element={<Support />} />
+          <Route path="nond/legal" element={<Legal />} />
+          <Route path="privacy" element={<Privacy />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

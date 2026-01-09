@@ -1,0 +1,27 @@
+/* Global background and floating blobs used across all pages */
+:root{
+  --bg-top:#071024;
+  --bg-mid:#0f172a;
+}
+.page-layout{
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  background: linear-gradient(135deg,var(--bg-mid) 0%, var(--bg-top) 60%);
+  color: #e6f0ff;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+.page-content{
+  position:relative;
+  z-index:2;
+  min-height:100vh;
+}
+.floating-blobs{ position:absolute; inset:0; z-index:1; pointer-events:none; }
+.blob{ position:absolute; border-radius:50%; filter: blur(40px); opacity:0.7; animation:float 8s ease-in-out infinite; }
+.b1{ width:360px; height:360px; left:-12%; top:10%; background:radial-gradient(circle at 30% 30%, #7c3aed, transparent 40%); }
+.b2{ width:260px; height:260px; right:-8%; top:30%; background:radial-gradient(circle at 30% 30%, #06b6d4, transparent 40%); animation-duration:10s; }
+.b3{ width:420px; height:420px; left:10%; bottom:-12%; background:radial-gradient(circle at 30% 30%, #f97316, transparent 30%); animation-duration:12s; }
+@keyframes float{ 0%{ transform:translateY(0) } 50%{ transform:translateY(-24px) } 100%{ transform:translateY(0) } }
+
+/* Make sure links and cards keep good contrast */
+.page-layout a{ color:inherit; }
