@@ -1,18 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../assets/css/Pastel.css';
 import ProfilePicture from './ProfilePic';
-import GridWrapper from './GridWrapper';
-import GridItemWrapper from './GridItemWrapper';
 import TypingEffect from './TypingEffect';
-import { useWindowSize } from "@uidotdev/usehooks";
 
 const App: React.FC = () => {
-  const PC_WIDTH = 650;
-  const [isTypingComplete, setIsTypingComplete] = useState(false);
-  const size = useWindowSize();
-  const handleTypingComplete = () => {
-    setIsTypingComplete(true);
-  };
+  const handleTypingComplete = () => {};
 
   // Clean, professional card layout for all screen sizes
   return (

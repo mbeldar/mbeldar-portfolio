@@ -32,7 +32,7 @@ const TypingEffect: React.FC<TypingEffectProps> = ({ text, speed = 100, initialD
     if (startTyping && index === text.length && onComplete) {
         onComplete();
       }
-  }, [index, text, speed, startTyping]);
+  }, [index, text, speed, startTyping, onComplete]);
 
   return <p>{displayedText}</p>;
 };

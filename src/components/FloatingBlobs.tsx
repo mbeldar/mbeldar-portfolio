@@ -35,19 +35,21 @@ const FloatingBlobs: React.FC = () => {
       const w = preset.w;
       const h = preset.h;
 
-      let x = 0;
-      let y = 0;
+      let posX = 0;
+      let posY = 0;
       let tries = 0;
       do {
-        x = rand(-w * 0.5, vw - w * 0.5);
-        y = rand(-h * 0.5, vh - h * 0.5);
+        posX = rand(-w * 0.5, vw - w * 0.5);
+        posY = rand(-h * 0.5, vh - h * 0.5);
         tries++;
         if (tries > 12) break;
       } while (state.some(s => {
-        const dx = s.x - x;
-        const dy = s.y - y;
+        const dx = s.x - posX;
+        const dy = s.y - posY;
         return Math.hypot(dx, dy) < minDist;
       }));
+      const x = posX;
+      const y = posY;
 
       const angle = rand(0, Math.PI * 2);
       const speed = rand(12, 50); // px/sec
