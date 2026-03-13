@@ -13,6 +13,13 @@ const PRESET = [
 
 const rand = (min: number, max: number) => Math.random() * (max - min) + min;
 
+const overlapsAny = (
+  state: Array<{ x: number; y: number }>,
+  cx: number,
+  cy: number,
+  minDist: number
+) => state.some(s => Math.hypot(s.x - cx, s.y - cy) < minDist);
+
 const FloatingBlobs: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -42,12 +49,7 @@ const FloatingBlobs: React.FC = () => {
         posX = rand(-w * 0.5, vw - w * 0.5);
         posY = rand(-h * 0.5, vh - h * 0.5);
         tries++;
-        if (tries > 12) break;
-      } while (state.some(s => {
-        const dx = s.x - posX;
-        const dy = s.y - posY;
-        return Math.hypot(dx, dy) < minDist;
-      }));
+      } while (tries <= 12 && overlapsAny(state, posX, posY, minDist));
       const x = posX;
       const y = posY;
 
