@@ -14,46 +14,66 @@ const App: React.FC = () => {
     setIsTypingComplete(true);
   };
 
-  return size?.width != null && size.width < PC_WIDTH ? (
-    < GridWrapper >
-      <GridItemWrapper rowStart={2} columnStart={1} columnEnd={5}>
-        <p style={{ textAlign: 'left', fontSize: '2em', padding: '10px', color: 'var(--white)' }}>
-          Hi, I am Mayur Beldar.
-          <TypingEffect text="A Sr. Software Development Engineer with a strong product mindset." onComplete={handleTypingComplete} speed={50} initialDelay={1500} />
-        </p>
-      </GridItemWrapper>
-      <GridItemWrapper rowStart={1} columnStart={3}>
+  // Clean, professional card layout for all screen sizes
+  return (
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--background-color)' }}>
+      <div style={{
+        maxWidth: 370,
+        width: '100%',
+        padding: '28px 20px 24px 20px',
+        border: '1px solid #222',
+        borderRadius: 12,
+        background: '#111',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 18
+      }}>
         <ProfilePicture />
-      </GridItemWrapper>
-
-      <GridItemWrapper rowStart={3} columnStart={1} columnEnd={5}>
-        <p className="social" style={{ visibility: isTypingComplete ? 'visible' : 'hidden' }}>
-          Connect with me on <a target="_blank" href="https://www.linkedin.com/in/mayurbeldar/">LinkedIn</a> and <a target="_blank" href="https://github.com/mbeldar">Github</a>.
-        </p>
-      </GridItemWrapper>
-    </GridWrapper >
-  ) :
-  (
-    <GridWrapper>
-      {/* Intro text on the left side of the profile picture */}
-      <GridItemWrapper rowStart={2} columnStart={2} columnEnd={4}>
-        <p style={{ textAlign: 'left', fontSize: '2em', padding: '20px', color: 'var(--white)' }}>
-          Hi, I am Mayur Beldar.
-          <TypingEffect text="A Sr. Software Development Engineer with a strong product mindset." onComplete={handleTypingComplete} speed={50} initialDelay={1500} />
-        </p>
-      </GridItemWrapper>
-
-      {/* Profile picture on the right side, 2/3 from the left margin */}
-      <GridItemWrapper rowStart={2} columnStart={4}>
-        <ProfilePicture />
-      </GridItemWrapper>
-
-      <GridItemWrapper rowStart={3} columnStart={2} columnEnd={4}>
-        <p className="social" style={{ visibility: isTypingComplete ? 'visible' : 'hidden' }}>
-          Connect with me on <a target="_blank" href="https://www.linkedin.com/in/mayurbeldar/">LinkedIn</a> and <a target="_blank" href="https://github.com/mbeldar">Github</a>.
-        </p>
-      </GridItemWrapper>
-    </GridWrapper>
+        <h1 style={{ margin: '12px 0 0 0', fontSize: '1.7em', color: 'var(--text-color)', fontWeight: 600, letterSpacing: '-0.5px', textAlign: 'center' }}>Mayur Beldar</h1>
+        <div style={{ width: '100%', textAlign: 'center', minHeight: 40, fontSize: '1.05em', color: '#bbb' }}>
+          <TypingEffect text="Sr. Software Development Engineer with a strong product mindset." onComplete={handleTypingComplete} speed={40} initialDelay={1000} />
+        </div>
+        <div style={{ width: '100%', marginTop: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+          <a style={{
+            width: '100%',
+            textAlign: 'center',
+            textDecoration: 'none',
+            color: '#fff',
+            background: 'none',
+            border: '1px solid #333',
+            borderRadius: 6,
+            padding: '8px 0',
+            fontWeight: 500,
+            fontSize: '1em',
+            transition: 'background 0.2s',
+            marginBottom: 2
+          }}
+            href="https://www.linkedin.com/in/mayurbeldar/" target="_blank" rel="noopener noreferrer"
+            onMouseOver={e => (e.currentTarget.style.background = '#191919')}
+            onMouseOut={e => (e.currentTarget.style.background = 'none')}
+          >LinkedIn</a>
+          <a style={{
+            width: '100%',
+            textAlign: 'center',
+            textDecoration: 'none',
+            color: '#fff',
+            background: 'none',
+            border: '1px solid #333',
+            borderRadius: 6,
+            padding: '8px 0',
+            fontWeight: 500,
+            fontSize: '1em',
+            transition: 'background 0.2s',
+            marginBottom: 2
+          }}
+            href="https://github.com/mbeldar" target="_blank" rel="noopener noreferrer"
+            onMouseOver={e => (e.currentTarget.style.background = '#191919')}
+            onMouseOut={e => (e.currentTarget.style.background = 'none')}
+          >GitHub</a>
+        </div>
+      </div>
+    </div>
   );
 };
 
