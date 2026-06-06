@@ -1,0 +1,140 @@
+.autologs-root {
+  padding: 40px 20px;
+  color: var(--white);
+}
+
+/* Hero */
+.autologs-hero {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.autologs-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 26px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 32px rgba(13, 27, 46, 0.7);
+}
+.autologs-copy h1 {
+  font-size: 2.2rem;
+  margin: 0 0 16px 0;
+  line-height: 1.25;
+}
+.autologs-subtitle {
+  font-size: 1.05rem;
+  font-weight: 400;
+  margin: 0 0 22px 0;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.6;
+}
+.autologs-badge-link {
+  display: inline-block;
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.autologs-badge-link img {
+  height: 44px;
+}
+.autologs-coming-soon {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: #8ab4e8;
+  letter-spacing: 0.04em;
+}
+
+/* CTA button */
+.autologs-cta-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #1a3a6e, #2e5fac);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 12px 28px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: transform 200ms, box-shadow 200ms;
+  box-shadow: 0 4px 18px rgba(30, 80, 160, 0.45);
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Sections */
+.autologs-section {
+  max-width: 820px;
+  margin: 56px auto 0;
+}
+.autologs-section h2 {
+  font-size: 1.6rem;
+  margin: 0 0 18px 0;
+  color: #8ab4e8;
+}
+
+/* Features */
+.autologs-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+.autologs-features li {
+  background: rgba(138, 180, 232, 0.07);
+  border: 1px solid rgba(138, 180, 232, 0.18);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.autologs-features li strong {
+  display: block;
+  color: #8ab4e8;
+  margin-bottom: 4px;
+}
+
+/* Platform badge */
+.autologs-platform {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(138, 180, 232, 0.1);
+  border: 1px solid rgba(138, 180, 232, 0.25);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.82rem;
+  color: #8ab4e8;
+  margin-bottom: 16px;
+}
+
+/* Download section */
+.autologs-download {
+  text-align: center;
+  padding: 40px 24px;
+  background: rgba(138, 180, 232, 0.04);
+  border: 1px solid rgba(138, 180, 232, 0.1);
+  border-radius: 16px;
+  margin: 48px auto 48px;
+  max-width: 820px;
+}
+.autologs-download p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 16px 0;
+}
+
+@media (max-width: 640px) {
+  .autologs-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .autologs-copy h1 {
+    font-size: 1.7rem;
+  }
+}
