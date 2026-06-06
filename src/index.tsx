@@ -21,6 +21,8 @@ import NondBlogFreeMealPlanner from './components/NondBlogFreeMealPlanner';
 import NondBlogGroceryList from './components/NondBlogGroceryList';
 import NondBlogRecipeManager from './components/NondBlogRecipeManager';
 import NondFaq from './components/NondFaq';
+import AutoLogs from './components/AutoLogs';
+import AutoLogsLegal from './components/AutoLogsLegal';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -45,6 +47,8 @@ root.render(
           <Route path="nond/blog/grocery-list-from-meal-plan" element={<NondBlogGroceryList />} />
           <Route path="nond/blog/recipe-manager-ios" element={<NondBlogRecipeManager />} />
           <Route path="nond/faq" element={<NondFaq />} />
+          <Route path="autologs" element={<AutoLogs />} />
+          <Route path="autologs/legal" element={<AutoLogsLegal />} />
           <Route path="privacy" element={<Privacy />} />
         </Route>
       </Routes>
