@@ -1,8 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../assets/css/PetAGrizzly.css';
 
 const PetAGrizzly: React.FC = () => {
   const [showSteps, setShowSteps] = useState(false);
+  const stepsRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!showSteps || !stepsRef.current) {
+      return;
+    }
+
+    stepsRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }, [showSteps]);
 
   return (
     <main className="grizzly-page">
@@ -30,10 +42,14 @@ const PetAGrizzly: React.FC = () => {
       </section>
 
       {showSteps && (
-        <section id="grizzly-steps" className="grizzly-panel">
+        <section
+          id="grizzly-steps"
+          ref={stepsRef}
+          className="grizzly-panel"
+        >
           <span className="grizzly-chip">Official Procedure</span>
           <h2 className="grizzly-warning">
-            You food dont try that.
+            You fool, don&apos;t try that.
             <br />
             What&apos;s wrong with you?
           </h2>
