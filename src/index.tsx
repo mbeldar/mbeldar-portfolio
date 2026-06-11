@@ -23,6 +23,7 @@ import NondBlogRecipeManager from './components/NondBlogRecipeManager';
 import NondFaq from './components/NondFaq';
 import AutoLogs from './components/AutoLogs';
 import AutoLogsLegal from './components/AutoLogsLegal';
+import PetAGrizzly from './components/PetAGrizzly';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -50,6 +51,7 @@ root.render(
           <Route path="autologs" element={<AutoLogs />} />
           <Route path="autologs/legal" element={<AutoLogsLegal />} />
           <Route path="privacy" element={<Privacy />} />
+          <Route path="pet-a-grizzly" element={<PetAGrizzly />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -25,6 +25,18 @@ const RootLanding: React.FC = () => {
             <div className="app-title">Profile</div>
             <div className="app-desc">My Work Profile</div>
           </Link>
+
+          <Link
+            to="/pet-a-grizzly"
+            className="app-card"
+            style={{
+              background: 'linear-gradient(180deg, rgba(73,42,24,0.92), rgba(36,22,13,0.82))',
+              borderTop: '1px solid rgba(255,214,153,0.22)'
+            }}
+          >
+            <div className="app-title" style={{ color: '#ffd79f' }}>Pet A Grizzly</div>
+            <div className="app-desc">A terrible plan presented with great confidence.</div>
+          </Link>
         </div>
       </div>
 
