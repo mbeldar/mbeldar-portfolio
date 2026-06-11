@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../assets/css/PetAGrizzly.css';
 
 const PetAGrizzly: React.FC = () => {
@@ -64,6 +65,26 @@ const PetAGrizzly: React.FC = () => {
           </p>
         </section>
       )}
+
+      <section className="grizzly-apps">
+        <p className="grizzly-apps-label">Try one of my actual apps instead</p>
+        <div className="grizzly-app-links">
+          <Link to="/nond" className="grizzly-app-link">
+            Nond
+          </Link>
+          <a
+            href="https://testflight.apple.com/join/pXANPkBF"
+            className="grizzly-app-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            AutoLogs
+          </a>
+          <Link to="/profile" className="grizzly-app-link">
+            Profile
+          </Link>
+        </div>
+      </section>
     </main>
   );
 };
