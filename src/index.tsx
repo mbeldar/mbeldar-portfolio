@@ -24,6 +24,7 @@ import NondFaq from './components/NondFaq';
 import AutoLogs from './components/AutoLogs';
 import AutoLogsLegal from './components/AutoLogsLegal';
 import PetAGrizzly from './components/PetAGrizzly';
+import PaperTrail from './components/PaperTrail';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -33,6 +34,7 @@ root.render(
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
+        <Route path="/paper-trail" element={<PaperTrail />} />
         <Route path="/" element={<PageLayout />}>
           <Route index element={<RootLanding />} />
           <Route path="profile" element={<App />} />

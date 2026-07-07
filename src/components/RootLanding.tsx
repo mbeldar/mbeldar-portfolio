@@ -21,6 +21,18 @@ const RootLanding: React.FC = () => {
             <div className="app-desc">Vehicle maintenance tracker — iOS</div>
           </Link>
 
+          <Link
+            to="/paper-trail"
+            className="app-card"
+            style={{
+              background: 'linear-gradient(180deg, rgba(96,90,124,0.92), rgba(55,51,72,0.78))',
+              borderTop: '1px solid rgba(253,213,227,0.26)'
+            }}
+          >
+            <div className="app-title" style={{ color: '#fdd5e3' }}>Paper Trail</div>
+            <div className="app-desc">Local-first document photo organizer.</div>
+          </Link>
+
           <Link to="/profile" className="app-card secondary">
             <div className="app-title">Profile</div>
             <div className="app-desc">My Work Profile</div>
