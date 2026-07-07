@@ -30,7 +30,7 @@ const RootLanding: React.FC = () => {
             }}
           >
             <div className="app-title" style={{ color: '#fdd5e3' }}>Paper Trail</div>
-            <div className="app-desc">Local-first document photo organizer.</div>
+            <div className="app-desc">Find document photos and clean up Photos.</div>
           </Link>
 
           <Link to="/profile" className="app-card secondary">

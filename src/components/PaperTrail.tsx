@@ -4,7 +4,6 @@ import libraryScreenshot from "../assets/paper-trail/screenshots/library.png";
 import addScreenshot from "../assets/paper-trail/screenshots/add.png";
 import reviewPhotosScreenshot from "../assets/paper-trail/screenshots/review-photos.png";
 import documentDetailScreenshot from "../assets/paper-trail/screenshots/document-detail.png";
-import localFirstScreenshot from "../assets/paper-trail/screenshots/local-first.png";
 
 type PhoneVariant = "library" | "add" | "detail";
 type DetailKind = "warranty" | "ticket";
@@ -31,66 +30,65 @@ const screenshotAssets = {
   add: addScreenshot,
   reviewPhotos: reviewPhotosScreenshot,
   documentDetail: documentDetailScreenshot,
-  localFirst: localFirstScreenshot,
 };
 
 const categories = [
   "Receipts",
-  "Invoices",
+  "Warranty Cards",
   "Travel & Tickets",
   "Contact Cards",
   "QR & Barcodes",
   "Labels & Packages",
-  "Notes & Docs",
-  "Recently Added",
+  "Notes & Forms",
+  "Recently Saved",
 ];
 
 const steps = [
   {
     number: "01",
-    title: "Add a document photo",
+    title: "Bring in the photos worth keeping",
     copy:
-      "Take a photo, pick one from Photos, or scan your library for document-like images.",
+      "Scan Photos, pick a few images, or capture a new one so receipts, labels, notes, and cards have a home.",
     className: "add-mini",
-    labels: ["Camera", "Scan Photo Library", "Photo Library"],
+    labels: ["Camera", "Photos sweep", "Pick favorites"],
   },
   {
     number: "02",
-    title: "Review what paper.trail found",
+    title: "Keep only what matters",
     copy:
-      "Review matches before they enter your library. Skip duplicates, misses, and unreadable shots.",
+      "Review every match before it is saved, so blurry shots and random pictures stay out.",
     className: "review-mini",
-    labels: ["Ready to import", "Not a match", "Could not read"],
+    labels: ["Worth saving", "Skip", "Try later"],
   },
   {
     number: "03",
-    title: "Save a local copy",
+    title: "Make Photos lighter",
     copy:
-      "Selected items are copied into local app storage and indexed for search.",
+      "After copies are saved, choose which originals to remove from Photos and cut down on iCloud storage clutter.",
     className: "local-mini",
-    labels: ["Copied locally", "Search terms added"],
+    labels: ["Saved copy", "Review originals", "Space back"],
   },
   {
     number: "04",
-    title: "Find it when you need it",
+    title: "Find it by the clue you remember",
     copy:
-      "Search names, dates, tags, or text when you need the original image again.",
+      "Search a store name, date, label, trip, or note when the moment suddenly matters.",
     className: "find-mini",
-    labels: ["serial label", "Mar 08", "favorite"],
+    labels: ["warranty", "Apr 21", "serial label"],
   },
 ];
 
 const useCases = [
-  ["Return receipts", "Find proof before the return window closes."],
-  ["Warranty proof", "Keep the receipt that matters when something breaks."],
-  ["Serial-number labels", "Keep model numbers without saving the box."],
-  ["Shipping labels", "Save tracking labels after the package is gone."],
-  ["Contact cards", "Turn a card photo into a searchable contact clue."],
-  ["Handwritten notes", "Keep quick notes findable after the paper moves."],
-  ["Travel bookings", "Save confirmation details with your other trip papers."],
+  ["Return receipts", "Bring up proof before the return window closes."],
+  ["Warranty proof", "Find the purchase photo when something breaks."],
+  ["Serial-number labels", "Search model numbers without keeping the box."],
+  ["Shipping labels", "Save tracking details without clogging Photos."],
+  ["Contact cards", "Find names from a card without digging through camera roll."],
+  ["Handwritten notes", "Save the idea without keeping the paper."],
+  ["Travel bookings", "Pull up confirmation details with the rest of your trip."],
   ["Event tickets", "Keep the ticket image ready for the door."],
-  ["QR codes and barcodes", "Find useful codes without digging through Photos."],
-  ["Bills and statements", "Keep image copies for later reference."],
+  ["QR codes and barcodes", "Find useful codes without scrolling through old photos."],
+  ["Bills and forms", "Keep a private image copy ready for later."],
 ];
 
 function Header() {
@@ -101,8 +99,8 @@ function Header() {
         paper.trail
       </a>
       <nav className="nav-links" aria-label="Section links">
-        <a href="#how-it-works">How it works</a>
-        <a href="#library">Library</a>
+        <a href="#how-it-works">How it helps</a>
+        <a href="#library">Organize Photos</a>
         <a href="#privacy">Privacy</a>
       </nav>
       <a className="nav-cta" href="#waitlist">Join Waitlist</a>
@@ -181,8 +179,8 @@ function LibraryScreen() {
         <span className="mini-label">Library</span>
         <span className="round-control" />
       </div>
-      <div className="search-field">Search text, names, dates, tags</div>
-      <h4>Recently Added</h4>
+      <div className="search-field">Search store, date, label, note</div>
+      <h4>Recently Saved</h4>
       <div className="recent-strip">
         <div className="doc-thumb receipt"><span>Return receipt</span></div>
         <div className="doc-thumb note"><span>Handwritten note</span></div>
@@ -191,7 +189,7 @@ function LibraryScreen() {
       <h4>Categories</h4>
       <div className="category-grid full">
         <div>Receipts</div>
-        <div>Invoices</div>
+        <div>Warranties</div>
         <div>Travel</div>
         <div>Notes</div>
       </div>
@@ -210,12 +208,12 @@ function AddScreen() {
       <div className="capture-card">
         <div className="capture-lens" />
         <strong>Add a document photo</strong>
-        <span>Camera, Photos, or library scan</span>
+        <span>Camera, Photos, or quick sweep</span>
       </div>
       <div className="action-list spacious">
         <div><span />Camera</div>
-        <div><span />Scan Photo Library</div>
-        <div><span />Photo Library</div>
+        <div><span />Sweep Photos</div>
+        <div><span />Pick from Photos</div>
       </div>
     </div>
   );
@@ -259,7 +257,7 @@ function DetailScreen({ detail }: DetailScreenProps) {
         <div className="terms">
           <span>station</span>
           <span>confirmation</span>
-          <span>business trip</span>
+          <span>spring trip</span>
         </div>
       )}
     </div>
@@ -273,14 +271,15 @@ function Hero() {
       <div className="hero-inner">
         <div className="hero-copy">
           <div className="trust-pills" aria-label="Product qualities">
-            <span>Local-first</span>
-            <span>Photo documents</span>
-            <span>Fast search</span>
+            <span>Works offline</span>
+            <span>No sign-in</span>
+            <span>Private on iPhone</span>
           </div>
           <h1 id="hero-title">paper.trail</h1>
-          <p className="hero-kicker">Save it now. Find it later.</p>
+          <p className="hero-kicker">Stop losing important photos in Photos.</p>
           <p className="hero-body">
-            Receipts, labels, notes, cards, tickets, and codes, searchable on your iPhone.
+            Pull receipts, labels, notes, cards, tickets, and codes out of camera-roll chaos.
+            Find them fast, then remove the originals from Photos after you review.
           </p>
           <div className="hero-actions">
             <a className="button primary" href="#waitlist">Join Waitlist</a>
@@ -301,8 +300,8 @@ function HowItWorks() {
   return (
     <section className="section steps-section" id="how-it-works" aria-labelledby="steps-title">
       <div className="section-heading">
-        <p className="eyebrow">How it works</p>
-        <h2 id="steps-title">From photo to found in four steps.</h2>
+        <p className="eyebrow">How it helps</p>
+        <h2 id="steps-title">A calmer way to keep proof without keeping clutter.</h2>
       </div>
       <div className="steps-grid">
         {steps.map((step) => (
@@ -328,10 +327,12 @@ function LibraryFeature() {
           <Phone variant="library" className="large-phone" />
         </div>
         <div className="feature-copy">
-          <p className="eyebrow">Library</p>
-          <h2 id="library-title">Your paper-photo library</h2>
+          <p className="eyebrow">Organized Photos</p>
+          <h2 id="library-title">Give document photos their own place</h2>
           <p>
-            Recent saves, categories, and search keep small documents easy to get back to.
+            Receipts, warranty cards, labels, notes, and tickets stop disappearing between
+            everyday pictures. paper.trail keeps the important little images together so you
+            can search them later.
           </p>
           <div className="chip-grid" aria-label="Library categories">
             {categories.map((category) => <span key={category}>{category}</span>)}
@@ -347,10 +348,11 @@ function ImportFeature() {
     <section className="feature-band import-band" aria-labelledby="import-title">
       <div className="feature-inner flipped">
         <div className="feature-copy">
-          <p className="eyebrow">Import</p>
-          <h2 id="import-title">Import without cleaning your camera roll</h2>
+          <p className="eyebrow">Space Back</p>
+          <h2 id="import-title">Clean up Photos without losing proof</h2>
           <p>
-            Scan Photos, choose manually, or use Camera. You review everything before it is saved.
+            Save the document shots you want, review the originals, then remove them from Photos
+            after you confirm.
           </p>
         </div>
         <div className="feature-visual paired-phones">
@@ -376,11 +378,11 @@ function ReviewSheet() {
 function ReviewSheetFallback() {
   const stats = [
     ["Photos checked", "248", ""],
-    ["Ready to import", "18", "ready"],
-    ["Not a match", "207", ""],
-    ["Already in app", "9", ""],
-    ["Could not read", "4", ""],
-    ["Imported", "10", "imported"],
+    ["Worth saving", "18", "ready"],
+    ["Skipped", "207", ""],
+    ["Already saved", "9", ""],
+    ["Needs review", "4", ""],
+    ["Saved", "10", "imported"],
   ];
 
   return (
@@ -393,7 +395,7 @@ function ReviewSheetFallback() {
           <strong>{value}</strong>
         </div>
       ))}
-      <p>Scan range: Last 12 months</p>
+      <p>Recent photo sweep</p>
     </div>
   );
 }
@@ -406,10 +408,11 @@ function DetailFeature() {
           <Phone variant="detail" detail="ticket" className="large-phone" />
         </div>
         <div className="feature-copy">
-          <p className="eyebrow">Details</p>
-          <h2 id="detail-title">Fix what search should remember</h2>
+          <p className="eyebrow">Findability</p>
+          <h2 id="detail-title">Search the detail you remember</h2>
           <p>
-            Rename a document, favorite it, share it, edit search terms, or delete it with confirmation.
+            Look for a store name, date, label, trip, or note instead of scrolling through months
+            of pictures.
           </p>
         </div>
       </div>
@@ -421,15 +424,15 @@ function Privacy() {
   return (
     <section className="privacy-section" id="privacy" aria-labelledby="privacy-title">
       <div className="privacy-inner">
-        <LocalFirstVisual />
+        <ScreenshotCollage />
         <div>
-          <p className="eyebrow">Privacy</p>
-          <h2 id="privacy-title">Private by design</h2>
+          <p className="eyebrow">Privacy First</p>
+          <h2 id="privacy-title">Useful without internet</h2>
           <div className="privacy-list">
-            <p>Documents are copied into local app storage.</p>
-            <p>Search starts on device.</p>
-            <p>No account or cloud library in v1.</p>
-            <p>On supported devices, on-device intelligence can improve search terms.</p>
+            <p>Your documents stay on your iPhone.</p>
+            <p>Search works offline.</p>
+            <p>No sign-in, no new cloud storage to feed.</p>
+            <p>Originals in Photos are removed only after you review and confirm.</p>
           </div>
         </div>
       </div>
@@ -437,25 +440,21 @@ function Privacy() {
   );
 }
 
-function LocalFirstVisual() {
+function ScreenshotCollage() {
   return (
-    <AssetImage
-      className="device-visual device-visual-asset"
-      src={screenshotAssets.localFirst}
-      alt="Local-first paper.trail storage visual"
-      fallback={<LocalFirstVisualFallback />}
-    />
-  );
-}
-
-function LocalFirstVisualFallback() {
-  return (
-    <div className="device-visual" aria-hidden="true">
-      <div className="device-core">
-        <span className="folder-tab" />
-        <span className="device-line one" />
-        <span className="device-line two" />
-        <span className="device-line three" />
+    <div className="privacy-collage" role="img" aria-label="paper.trail app screenshots">
+      <div className="collage-grid" aria-hidden="true" />
+      <div className="collage-card collage-card-library">
+        <img src={screenshotAssets.library} alt="" />
+      </div>
+      <div className="collage-card collage-card-detail">
+        <img src={screenshotAssets.documentDetail} alt="" />
+      </div>
+      <div className="collage-card collage-card-add">
+        <img src={screenshotAssets.add} alt="" />
+      </div>
+      <div className="collage-sheet">
+        <img src={screenshotAssets.reviewPhotos} alt="" />
       </div>
     </div>
   );
@@ -466,7 +465,7 @@ function UseCases() {
     <section className="section use-cases" aria-labelledby="use-cases-title">
       <div className="section-heading">
         <p className="eyebrow">Everyday documents</p>
-        <h2 id="use-cases-title">Built for everyday document photos</h2>
+        <h2 id="use-cases-title">For the small photos that become important later</h2>
       </div>
       <div className="use-case-grid">
         {useCases.map(([title, copy]) => (
@@ -485,9 +484,10 @@ function FinalCta() {
     <section className="final-cta" id="waitlist" aria-labelledby="waitlist-title">
       <div className="cta-inner">
         <p className="eyebrow">Join the waitlist</p>
-        <h2 id="waitlist-title">Build a searchable paper trail.</h2>
+        <h2 id="waitlist-title">Find the thing before it becomes a problem.</h2>
         <p>
-          Keep the small important things without turning them into a filing project.
+          Join the waitlist for a calmer way to keep proof, codes, notes, and labels without
+          paying for clutter you no longer need.
         </p>
         <form className="waitlist-form" aria-label="Join the paper.trail waitlist">
           <label htmlFor="email">Email address</label>
@@ -496,7 +496,7 @@ function FinalCta() {
             <button type="submit">Join Waitlist</button>
           </div>
         </form>
-        <p className="secondary-note">Built for iPhone. Local-first. Image documents only.</p>
+        <p className="secondary-note">Built for iPhone. Works offline. No sign-in.</p>
       </div>
     </section>
   );
@@ -511,8 +511,8 @@ function Footer() {
         <a href="mailto:hello@papertrail.example">Contact</a>
       </div>
       <p>
-        paper.trail is designed for image-based personal documents. PDF import,
-        cloud sync, accounts, and team workflows are not part of v1.
+        paper.trail keeps everyday document photos searchable on your iPhone, helps you remove
+        confirmed originals from Photos, and works without internet.
       </p>
     </footer>
   );
@@ -520,7 +520,7 @@ function Footer() {
 
 export default function PaperTrail() {
   useEffect(() => {
-    document.title = "paper.trail - Save document photos now. Find them later.";
+    document.title = "paper.trail - Find important document photos fast";
 
     let meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (!meta) {
@@ -529,7 +529,7 @@ export default function PaperTrail() {
       document.head.appendChild(meta);
     }
     meta.content =
-      "paper.trail is a local-first iPhone document organizer for receipts, notes, labels, cards, tickets, and codes.";
+      "paper.trail helps you find important document photos, clean up Photos after review, free up iCloud storage space, and keep everything private on your iPhone.";
 
     let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!canonical) {
