@@ -351,72 +351,6 @@ const state = {
   weather: new URLSearchParams(window.location.search).get("weather") === "wet" ? "wet" : "clear",
 };
 
-let map;
-let routePrimary;
-let routeOptional;
-const markers = {};
-
-function initMap() {
-  const mapElement = document.querySelector("#map");
-  if (!window.L) {
-    mapElement.innerHTML = '<div class="map-fallback"><strong>Map tiles could not load.</strong><br>Use the location buttons with your navigation app, and download an offline NPS map before departure.</div>';
-    return;
-  }
-
-  map = L.map("map", { scrollWheelZoom: false }).setView([47.95, -123.64], 8);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 18,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  }).addTo(map);
-
-  Object.entries(locations).forEach(([id, place]) => {
-    const icon = L.divIcon({
-      className: "custom-div-icon",
-      html: `<div class="map-marker marker-${place.category}"><span>${place.label}</span></div>`,
-      iconSize: [28, 28],
-      iconAnchor: [14, 27],
-      popupAnchor: [0, -24],
-    });
-    const marker = L.marker(place.coords, { icon }).addTo(map);
-    marker.bindPopup(`<span class="popup-kind">${place.category}</span><br><strong>${place.name}</strong><br>${place.note}`);
-    marker.category = place.category;
-    markers[id] = marker;
-  });
-
-  renderRoute();
-}
-
-function renderRoute() {
-  if (!map) return;
-  if (routePrimary) routePrimary.remove();
-  if (routeOptional) routeOptional.remove();
-
-  const primaryStops = state.duration === "sat"
-    ? ["edmonds", "kingston", "port-angeles", state.weather === "wet" ? "madison-falls" : "hurricane-ridge", "port-angeles", "marymere", "hoh", state.weather === "wet" ? "ruby" : "rialto", "kingston", "edmonds", "seattle"]
-    : ["edmonds", "kingston", "port-angeles", state.weather === "wet" ? "madison-falls" : "hurricane-ridge", "port-angeles", "marymere", "hoh", state.weather === "wet" ? "ruby" : "rialto", "forks"];
-  const optionalStops = state.duration === "sun" ? ["forks", "sol-duc", "kingston", "edmonds", "seattle"] : [];
-
-  routePrimary = L.polyline(primaryStops.map((id) => locations[id].coords), {
-    color: "#255f4c",
-    weight: 4,
-    opacity: 0.78,
-  }).addTo(map);
-
-  if (optionalStops.length) {
-    routeOptional = L.polyline(optionalStops.map((id) => locations[id].coords), {
-      color: "#b56d22",
-      weight: 4,
-      opacity: 0.75,
-      dashArray: "8 8",
-    }).addTo(map);
-  }
-
-  const bounds = routeOptional
-    ? L.featureGroup([routePrimary, routeOptional]).getBounds()
-    : routePrimary.getBounds();
-  map.fitBounds(bounds, { padding: [28, 28] });
-}
-
 function activeEventData(event) {
   const wet = state.weather === "wet";
   return {
@@ -499,21 +433,14 @@ function updateUrl() {
 function applyState() {
   updateControls();
   renderItinerary();
-  renderRoute();
   updateUrl();
 }
 
 function showLocation(id) {
   const place = locations[id];
   if (!place) return;
-  if (map && markers[id]) {
-    if (!map.hasLayer(markers[id])) markers[id].addTo(map);
-    map.setView(place.coords, id === "seattle" ? 9 : 11, { animate: true });
-    markers[id].openPopup();
-    document.querySelector("#map-title").scrollIntoView({ behavior: "smooth", block: "start" });
-  } else {
-    showToast(`${place.name}: ${place.note}`);
-  }
+  document.querySelector("#map-location-note").textContent = `${place.name} — ${place.note}`;
+  document.querySelector("#map-title").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function showToast(message) {
@@ -572,20 +499,6 @@ document.querySelectorAll(".stay-section [data-location], .hikes-section [data-l
   button.addEventListener("click", () => showLocation(button.dataset.location));
 });
 
-document.querySelectorAll("[data-filter]").forEach((button) => {
-  button.addEventListener("click", () => {
-    const filter = button.dataset.filter;
-    document.querySelectorAll("[data-filter]").forEach((item) => item.classList.toggle("active", item === button));
-    Object.values(markers).forEach((marker) => {
-      if (!map) return;
-      const visible = filter === "all" || marker.category === filter;
-      if (visible && !map.hasLayer(marker)) marker.addTo(map);
-      if (!visible && map.hasLayer(marker)) marker.removeFrom(map);
-    });
-  });
-});
-
 document.querySelector("#copy-plan").addEventListener("click", copyPlan);
 
-initMap();
 applyState();

@@ -8,12 +8,6 @@
       content="A practical Olympic Peninsula road-trip plan for October 16–18, 2026, with map, timing, weather alternatives, hikes, ferry options, and stay areas."
     />
     <title>Olympic Peninsula · Oct 16–18, 2026</title>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIINfQ3ynhZwHjMZQe2y6vJVMZ7L1q7zJjQ="
-      crossorigin=""
-    />
     <link rel="stylesheet" href="/trips-2026/styles.css" />
   </head>
   <body>
@@ -127,31 +121,28 @@
             <p class="section-kicker">General orientation</p>
             <h2 id="map-title">Map &amp; route</h2>
           </div>
-          <p class="map-note">Lines connect the plan’s stops; they are not turn-by-turn navigation.</p>
+          <p class="map-note">Illustrated orientation only — delightfully not to scale.</p>
         </div>
 
-        <div class="map-shell">
-          <div id="map" aria-label="Interactive map of the Olympic Peninsula trip"></div>
-          <aside class="map-sidebar" aria-label="Map controls">
-            <h3>Show locations</h3>
-            <div id="map-filters" class="filter-list">
-              <button class="filter active" data-filter="all" type="button">All</button>
-              <button class="filter" data-filter="transit" type="button">Transit</button>
-              <button class="filter" data-filter="mountain" type="button">Mountain</button>
-              <button class="filter" data-filter="forest" type="button">Forest / falls</button>
-              <button class="filter" data-filter="coast" type="button">Coast</button>
-              <button class="filter" data-filter="stay" type="button">Stay areas</button>
-            </div>
-            <div class="map-legend">
-              <p><span class="legend-line primary-line"></span> Primary route</p>
-              <p><span class="legend-line optional-line"></span> Sunday extension</p>
-            </div>
+        <figure class="map-shell">
+          <img
+            id="trip-map"
+            src="/trips-2026/olympic-peninsula-doodle-map.png"
+            width="1536"
+            height="1024"
+            alt="Hand-drawn route sketch of the Olympic Peninsula, from Seattle and the Edmonds–Kingston ferry to Port Angeles, Hurricane Ridge, Lake Crescent, Sol Duc, Forks, Hoh Rain Forest, and the Pacific beaches."
+          />
+          <figcaption class="map-caption">
+            <p><strong>A field-guide sketch, not a navigation map.</strong> Green marks the outbound and Saturday return; ochre shows the Sunday return.</p>
+            <p id="map-location-note" class="map-location-note" aria-live="polite">
+              Use any “Map” button below to bring this sketch back into view and read that stop’s field note.
+            </p>
             <p class="small-copy">
               Download the NPS app map before leaving Port Angeles. Cell service is unreliable around Lake
               Crescent, Sol Duc, Hoh, and the beaches.
             </p>
-          </aside>
-        </div>
+          </figcaption>
+        </figure>
       </section>
 
       <section class="itinerary-section" aria-labelledby="itinerary-title">
@@ -160,7 +151,7 @@
             <p class="section-kicker">Drive estimates include sensible buffers</p>
             <h2 id="itinerary-title">Timed itinerary</h2>
           </div>
-          <p class="map-note">Tap any location to find it on the map.</p>
+          <p class="map-note">Tap any location to jump back to the route sketch.</p>
         </div>
         <div id="itinerary" class="timeline"></div>
       </section>
@@ -461,11 +452,6 @@
 
     <div id="toast" role="status" aria-live="polite"></div>
 
-    <script
-      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-      crossorigin=""
-    ></script>
     <script src="/trips-2026/app.js"></script>
   </body>
 </html>
