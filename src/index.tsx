@@ -2,10 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import './assets/css/Pastel.css';
-import App from './components/App';
 import RootLanding from './components/RootLanding';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
 import PageLayout from './components/PageLayout';
 import Nond from './components/Nond';
@@ -23,7 +22,6 @@ import NondBlogRecipeManager from './components/NondBlogRecipeManager';
 import NondFaq from './components/NondFaq';
 import AutoLogs from './components/AutoLogs';
 import AutoLogsLegal from './components/AutoLogsLegal';
-import PetAGrizzly from './components/PetAGrizzly';
 import PaperTrail from './components/PaperTrail';
 
 const root = ReactDOM.createRoot(
@@ -37,7 +35,7 @@ root.render(
         <Route path="/paper-trail" element={<PaperTrail />} />
         <Route path="/" element={<PageLayout />}>
           <Route index element={<RootLanding />} />
-          <Route path="profile" element={<App />} />
+          <Route path="profile" element={<Navigate to="/" replace />} />
           <Route path="nond" element={<Nond />} />
           <Route path="nond/support" element={<Support />} />
           <Route path="nond/legal" element={<Legal />} />
@@ -53,7 +51,6 @@ root.render(
           <Route path="autologs" element={<AutoLogs />} />
           <Route path="autologs/legal" element={<AutoLogsLegal />} />
           <Route path="privacy" element={<Privacy />} />
-          <Route path="pet-a-grizzly" element={<PetAGrizzly />} />
         </Route>
       </Routes>
     </BrowserRouter>

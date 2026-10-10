@@ -14,8 +14,8 @@
   --line: rgba(96, 90, 124, 0.18);
   --shadow: 0 24px 70px rgba(72, 70, 77, 0.14);
   --small-shadow: 0 12px 34px rgba(72, 70, 77, 0.1);
-  --heading: "Plus Jakarta Sans", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --heading: "Avenir Next", "Century Gothic", sans-serif;
+  --body: "Avenir Next", "Century Gothic", sans-serif;
 }
 
 .paper-trail-page * {
@@ -1464,4 +1464,101 @@
     width: 188px;
     height: 98px;
   }
+}
+
+/* Full-bleed product hero: the app itself is the visual plane. */
+.paper-trail-page .hero-section {
+  --paper-hero-image: none;
+  min-height: 100svh;
+  padding: 112px 24px 48px;
+  background: #f7f1f4;
+}
+
+.paper-trail-page .hero-bg {
+  background-image:
+    linear-gradient(90deg, rgba(253, 248, 251, 0.98) 0%, rgba(253, 248, 251, 0.88) 43%, rgba(253, 248, 251, 0.18) 76%),
+    linear-gradient(0deg, rgba(96, 90, 124, 0.2), transparent 46%),
+    var(--paper-hero-image);
+  background-repeat: no-repeat;
+  background-position: center, center, 78% 22%;
+  background-size: cover, cover, max(680px, 58vw) auto;
+  animation: paper-hero-focus 1.2s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.paper-trail-page .hero-bg::after {
+  background-image: linear-gradient(rgba(96, 90, 124, 0.07) 1px, transparent 1px);
+  background-size: 100% 48px;
+  mask-image: linear-gradient(90deg, #000, transparent 66%);
+}
+
+.paper-trail-page .hero-inner {
+  display: flex;
+  align-items: center;
+  width: min(1180px, 100%);
+  min-height: calc(100svh - 160px);
+}
+
+.paper-trail-page .hero-copy {
+  width: min(620px, 55vw);
+  max-width: none;
+}
+
+.paper-trail-page h1 {
+  margin-top: 0;
+  font-size: clamp(4.8rem, 10vw, 9rem);
+  letter-spacing: -0.075em;
+  animation: paper-rise 720ms 120ms both;
+}
+
+.paper-trail-page .hero-kicker {
+  margin-top: 34px;
+  max-width: 600px;
+  font-family: "Avenir Next Condensed", "Avenir Next", sans-serif;
+  font-size: clamp(1.7rem, 3.5vw, 3.5rem);
+  font-style: normal;
+  font-weight: 600;
+  animation: paper-rise 720ms 240ms both;
+}
+
+.paper-trail-page .hero-body {
+  max-width: 520px;
+  animation: paper-rise 720ms 340ms both;
+}
+
+.paper-trail-page .hero-actions {
+  animation: paper-rise 720ms 440ms both;
+}
+
+@keyframes paper-rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes paper-hero-focus {
+  from { opacity: 0; transform: scale(1.04); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 760px) {
+  .paper-trail-page .hero-section { padding: 96px 18px 38px; }
+  .paper-trail-page .hero-bg {
+    background-image:
+      linear-gradient(0deg, rgba(253, 248, 251, 0.99) 0 50%, rgba(253, 248, 251, 0.42) 77%, transparent 100%),
+      var(--paper-hero-image);
+    background-position: center, 50% 0;
+    background-size: cover, 112vw auto;
+  }
+  .paper-trail-page .hero-inner { align-items: flex-end; min-height: calc(100svh - 134px); }
+  .paper-trail-page .hero-copy { width: 100%; }
+  .paper-trail-page h1 { font-size: clamp(3.9rem, 20vw, 6.4rem); }
+  .paper-trail-page .hero-kicker { margin-top: 22px; font-size: 1.6rem; }
+  .paper-trail-page .hero-actions { grid-template-columns: 1fr 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper-trail-page .hero-bg,
+  .paper-trail-page h1,
+  .paper-trail-page .hero-kicker,
+  .paper-trail-page .hero-body,
+  .paper-trail-page .hero-actions { animation: none; }
 }

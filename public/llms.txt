@@ -1,0 +1,23 @@
+# Mayur Beldar Apps
+
+Official product pages and factual summaries for iOS apps by Mayur Beldar.
+
+## Nond
+
+Nond is a private recipe organizer and weekly meal planner for iPhone. It connects saved recipes to a meal calendar, then combines the planned ingredients into one grocery list. Pantry staples can be excluded automatically. Saved recipes, plans, and grocery lists live on the device. Nond requires no account and no recurring subscription; optional home-screen widgets are available as a one-time in-app purchase.
+
+- Product page: https://mayurbeldar.com/nond
+- App Store: https://apps.apple.com/us/app/nond-recipe-grocery-planner/id6757132886
+- FAQ: https://mayurbeldar.com/nond/faq
+- Meal-planning guides: https://mayurbeldar.com/nond#guides
+
+## AutoLog
+
+Car Maintenance Log :: AutoLog is a private vehicle maintenance and service-history tracker for iPhone. It records service, fuel or electric charging, odometer readings, receipts, ownership costs, and multiple vehicles without an account. Drivers can export a PDF vehicle history to share with a mechanic or buyer. AutoLog does not collect user data.
+
+- Product page: https://mayurbeldar.com/autologs
+- App Store: https://apps.apple.com/us/app/car-maintenance-log-autolog/id6777612793
+
+## Developer
+
+- Mayur Beldar: https://mayurbeldar.com/

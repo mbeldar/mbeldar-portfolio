@@ -4,39 +4,39 @@ import './Legal.css';
 
 const AutoLogsLegal: React.FC = () => {
   useEffect(() => {
-    document.title = 'AutoLogs — Terms and Conditions';
+    document.title = 'AutoLog — Terms and Conditions';
     let meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (!meta) {
       meta = document.createElement('meta');
       meta.name = 'description';
       document.head.appendChild(meta);
     }
-    meta.content = 'Terms and Conditions for AutoLogs, the vehicle maintenance tracker for iPhone.';
+    meta.content = 'Terms and Conditions for AutoLog, the vehicle maintenance tracker for iPhone.';
   }, []);
 
   return (
     <div className="legal-root">
       <div className="legal-container">
-        <h1>Terms and Conditions for AutoLogs</h1>
+        <h1>Terms and Conditions for AutoLog</h1>
         <p className="legal-note">Last updated: June 2026</p>
 
         <p className="legal-lead">
-          These Terms and Conditions ("Terms") govern your use of AutoLogs (the "App") and the
+          These Terms and Conditions ("Terms") govern your use of AutoLog (the "App") and the
           associated web pages operated by Mayur Beldar ("we", "us", or "our"). By downloading,
-          installing, or using AutoLogs you agree to be bound by these Terms. If you do not agree,
+          installing, or using AutoLog you agree to be bound by these Terms. If you do not agree,
           do not use the App.
         </p>
 
         <h2>1. Use of the App</h2>
         <p>
-          AutoLogs is a personal vehicle maintenance tracker for iPhone. You may use the App solely
+          AutoLog is a personal vehicle maintenance tracker for iPhone. You may use the App solely
           for your own personal, non-commercial purposes. You agree not to reverse-engineer,
           decompile, disassemble, or otherwise attempt to derive the source code of the App.
         </p>
 
         <h2>2. No Professional Advice</h2>
         <p>
-          Information provided by AutoLogs — including maintenance schedules, mileage intervals,
+          Information provided by AutoLog — including maintenance schedules, mileage intervals,
           service reminders, and any pre-populated data — is for general informational and
           convenience purposes only. It does not constitute professional mechanical, automotive, or
           safety advice. Always consult a qualified mechanic or automotive technician for any
@@ -54,7 +54,7 @@ const AutoLogsLegal: React.FC = () => {
 
         <h2>4. Your Data</h2>
         <p>
-          AutoLogs stores all vehicle records, service logs, and mileage data locally on your
+          AutoLog stores all vehicle records, service logs, and mileage data locally on your
           device. We do not collect, transmit, or have access to your personal data or vehicle
           records. You are solely responsible for backing up your data. We are not liable for any
           data loss resulting from device failure, software updates, or accidental deletion.
@@ -112,7 +112,7 @@ const AutoLogsLegal: React.FC = () => {
         </p>
 
         <p className="legal-note">
-          These Terms apply solely to AutoLogs. Other apps and services offered on this site have
+          These Terms apply solely to AutoLog. Other apps and services offered on this site have
           their own terms.
         </p>
       </div>

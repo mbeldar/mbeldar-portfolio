@@ -3,39 +3,51 @@ import { Link } from 'react-router-dom';
 import '../assets/css/Pastel.css';
 import './Nond.css';
 import appImg from '../assets/app.png';
-import appBadge from '../assets/available-on-the-app-store.svg';
 
 const APP_STORE_URL = 'https://apps.apple.com/us/app/nond-recipe-grocery-planner/id6757132886';
 
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  name: 'Nond — Recipe & Grocery Planner',
-  operatingSystem: 'iOS',
+  name: 'Nond: Recipe & Grocery Planner',
+  alternateName: 'Nond',
+  operatingSystem: 'iOS 26.0 or later',
   applicationCategory: 'LifestyleApplication',
+  applicationSubCategory: 'Meal planning and recipe organization',
   offers: {
     '@type': 'Offer',
     price: '0',
     priceCurrency: 'USD',
   },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5',
-    ratingCount: '5',
-  },
   description:
-    'Meal planner for iPhone with no account and no subscription. Plan meals, build grocery lists from recipes, and manage your pantry — all offline and private.',
+    'A private meal planner and recipe organizer for iPhone that turns weekly meal plans into a consolidated grocery list. No account or recurring subscription required.',
   url: 'https://mayurbeldar.com/nond',
+  downloadUrl: APP_STORE_URL,
+  installUrl: APP_STORE_URL,
+  isAccessibleForFree: true,
+  featureList: [
+    'Weekly meal planner',
+    'Automatic grocery lists from planned recipes',
+    'Recipe import and organization',
+    'Pantry staples filtering',
+    'On-device private storage',
+  ],
+  author: {
+    '@type': 'Person',
+    name: 'Mayur Beldar',
+    url: 'https://mayurbeldar.com/',
+  },
+  sameAs: [APP_STORE_URL],
 };
 
 const faqs: { q: string; a: string }[] = [
   {
     q: 'Does Nond require an account?',
-    a: 'No. Nond works completely offline with no account, no sign-up, and no cloud sync required. Your data stays on your device.',
+    a: 'No. Nond requires no account, sign-up, or cloud sync. Your saved recipes, meal plan, and grocery list stay on your device and remain available offline.',
   },
   {
     q: 'Is Nond free?',
-    a: 'Yes, Nond is free to download on the App Store with no subscription and no hidden fees.',
+    a: 'Nond is free to download, and its core recipe, meal-planning, and grocery-list tools do not require a subscription. Optional home-screen widgets are available as a one-time in-app purchase.',
   },
   {
     q: 'How does the grocery list work?',
@@ -43,11 +55,15 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: 'Can I use Nond without an internet connection?',
-    a: 'Yes. Nond is fully offline — your recipes, meal plan, and grocery list are stored locally on your iPhone.',
+    a: 'Your saved recipes, meal plan, and grocery list are stored locally and remain available on your iPhone. Importing a new recipe from the web or using online search requires a connection.',
   },
   {
     q: 'Is there a subscription for Nond?',
-    a: 'No subscription. Nond is a one-time free download with no recurring charges.',
+    a: 'No. Nond does not require a recurring subscription. The optional widget upgrade is a one-time in-app purchase.',
+  },
+  {
+    q: 'Can Nond import recipes from the web?',
+    a: 'Yes. You can import a recipe from the web, find one with search, or add your own recipe manually, then place it directly into your weekly meal plan.',
   },
 ];
 
@@ -65,15 +81,45 @@ const Nond: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
-    document.title = 'Nond — Meal Planner for iPhone, No Account, No Subscription';
+    const title = 'Nond: iPhone Meal Planner & Grocery List';
+    const description =
+      'Nond is a private iPhone meal planner and recipe organizer that builds one grocery list from your weekly plan. Free core tools, no account, no subscription.';
+    const canonicalUrl = 'https://mayurbeldar.com/nond';
+
+    document.title = title;
     let meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (!meta) {
       meta = document.createElement('meta');
       meta.name = 'description';
       document.head.appendChild(meta);
     }
-    meta.content =
-      'Nond is a free iPhone meal planner with no account and no subscription. Plan meals, generate grocery lists from recipes, and manage your pantry — 100% offline.';
+    meta.content = description;
+
+    const socialTags = [
+      ['property', 'og:title', title],
+      ['property', 'og:description', description],
+      ['property', 'og:url', canonicalUrl],
+      ['name', 'twitter:title', title],
+      ['name', 'twitter:description', description],
+    ];
+
+    socialTags.forEach(([attribute, value, content]) => {
+      let tag = document.querySelector<HTMLMetaElement>(`meta[${attribute}="${value}"]`);
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute(attribute, value);
+        document.head.appendChild(tag);
+      }
+      tag.content = content;
+    });
+
+    let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+    canonical.href = canonicalUrl;
   }, []);
 
   return (
@@ -90,36 +136,30 @@ const Nond: React.FC = () => {
 
       {/* HERO */}
       <section className="nond-hero" aria-label="Hero">
-        <div className="nond-copy">
-          <h1>Meal Planner for iPhone — No Account, No Subscription</h1>
-          <p className="nond-subtitle">
-            Nond is a free iOS app that combines a digital cookbook, a two-week meal planner, and a
-            smart grocery list that knows your pantry. Plan meals for the week, auto-generate your
-            shopping list, and cook without the stress — all offline, no sign-up required.
-          </p>
-          <a
-            className="nond-cta-btn"
-            href={APP_STORE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Download Nond on the App Store"
-          >
-            Free Download — App Store
-          </a>
+        <Link to="/" className="nond-home-link" aria-label="Back to Mayur Beldar portfolio">
+          MB / Portfolio
+        </Link>
+        <div className="nond-hero-art" aria-hidden="true">
+          <img src={appImg} alt="" />
         </div>
-
-        <div className="nond-image">
-          <img src={appImg} alt="Nond meal planner app running on an iPhone" />
-          <div className="nond-store">
+        <div className="nond-copy">
+          <h1>Nond</h1>
+          <p className="nond-kicker">Plan meals once. Shop once.</p>
+          <p className="nond-subtitle">
+            A private iPhone meal planner that turns your recipes into a grocery list — free,
+            offline, and without an account.
+          </p>
+          <div className="nond-actions">
             <a
-              className="nond-store-link"
+              className="nond-cta-btn"
               href={APP_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Open Nond on the App Store (opens in a new tab)"
+              aria-label="Download Nond on the App Store"
             >
-              <img src={appBadge} alt="Available on the App Store" />
+              Download free
             </a>
+            <a className="nond-secondary-btn" href="#how-it-works">How it works</a>
           </div>
         </div>
       </section>
@@ -128,23 +168,48 @@ const Nond: React.FC = () => {
       <section className="nond-section" id="how-it-works" aria-labelledby="how-heading">
         <h2 id="how-heading">How It Works</h2>
         <ol className="nond-steps">
-          <li><strong>Save your recipes</strong> — add any recipe with ingredients, cook time, and servings. No internet needed.</li>
-          <li><strong>Plan your week</strong> — drag recipes onto up to two weeks of your meal calendar. Breakfast, lunch, and dinner slots included.</li>
-          <li><strong>Generate your grocery list</strong> — Nond reads every ingredient from your planned meals and builds a consolidated shopping list instantly.</li>
-          <li><strong>Mark your staples</strong> — flag pantry basics like olive oil or garlic once and they will be excluded from every future list automatically.</li>
-          <li><strong>Shop and cook</strong> — check items off as you shop, then follow your plan through the week.</li>
+          <li><span><strong>Save your recipes</strong> — add any recipe with ingredients, cook time, and servings. No internet needed.</span></li>
+          <li><span><strong>Plan your week</strong> — drag recipes onto up to two weeks of your meal calendar. Breakfast, lunch, and dinner slots included.</span></li>
+          <li><span><strong>Generate your grocery list</strong> — Nond reads every ingredient from your planned meals and builds a consolidated shopping list instantly.</span></li>
+          <li><span><strong>Mark your staples</strong> — flag pantry basics like olive oil or garlic once and they will be excluded from every future list automatically.</span></li>
+          <li><span><strong>Shop and cook</strong> — check items off as you shop, then follow your plan through the week.</span></li>
         </ol>
+      </section>
+
+      {/* SEARCH INTENT */}
+      <section className="nond-section nond-discovery" id="iphone-meal-planner" aria-labelledby="nond-discovery-heading">
+        <p className="nond-section-label">Made for iPhone</p>
+        <h2 id="nond-discovery-heading">A meal planner that connects recipes, your week, and one grocery list</h2>
+        <p className="nond-section-intro">
+          Nond is for people who want a simple weekly meal planner without creating an account
+          or paying for another subscription. Plan breakfast, lunch, and dinner, then take one
+          consolidated shopping list to the store.
+        </p>
+        <div className="nond-intent-grid">
+          <article>
+            <h3>Meal planner that makes a grocery list</h3>
+            <p>Schedule recipes and Nond combines their ingredients and quantities into one list automatically.</p>
+          </article>
+          <article>
+            <h3>Recipe organizer for iPhone</h3>
+            <p>Import recipes from the web, find one with search, or add your own so your personal cookbook and weekly plan stay together.</p>
+          </article>
+          <article>
+            <h3>Private meal planning without an account</h3>
+            <p>Your saved recipes, plans, and grocery lists live on your device. There is no account to create and no recurring subscription.</p>
+          </article>
+        </div>
       </section>
 
       {/* FEATURES */}
       <section className="nond-section" id="features" aria-labelledby="features-heading">
         <h2 id="features-heading">Features</h2>
         <ul className="nond-features">
-          <li><strong>Free meal planner for iPhone</strong> — no subscription, no paywall, no account required.</li>
+          <li><strong>Free core meal planner for iPhone</strong> — plan recipes and groceries with no account or recurring subscription.</li>
           <li><strong>Grocery list from meal plan</strong> — ingredients are pulled automatically from every recipe on your calendar.</li>
           <li><strong>Recipe manager for iOS</strong> — save, edit, and organize your own recipes with cook time and serving size.</li>
           <li><strong>Pantry &amp; staples system</strong> — mark household staples so they are never added to your shopping list by mistake.</li>
-          <li><strong>Meal prep app with no account</strong> — everything lives on-device; your data is never sent to a server.</li>
+          <li><strong>Meal prep app with no account</strong> — saved recipes, plans, and lists live on-device; Nond does not collect your data.</li>
           <li><strong>Dark Mode &amp; Light Mode</strong> — polished themes for any lighting condition.</li>
           <li><strong>Swipe gestures</strong> — check off groceries, mark staples, or reorder your list with intuitive swipes.</li>
         </ul>
@@ -194,7 +259,7 @@ const Nond: React.FC = () => {
       {/* DOWNLOAD */}
       <section className="nond-section nond-download" id="download" aria-labelledby="dl-heading">
         <h2 id="dl-heading">Download Nond — Free on the App Store</h2>
-        <p>No account. No subscription. Just a calm, private meal planner that lives on your iPhone.</p>
+        <p>No account. No recurring subscription. Just a calm, private meal planner that lives on your iPhone.</p>
         <a
           className="nond-cta-btn"
           href={APP_STORE_URL}

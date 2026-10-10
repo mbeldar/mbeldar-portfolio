@@ -99,6 +99,7 @@ function Header() {
         paper.trail
       </a>
       <nav className="nav-links" aria-label="Section links">
+        <a href="/">Portfolio</a>
         <a href="#how-it-works">How it helps</a>
         <a href="#library">Organize Photos</a>
         <a href="#privacy">Privacy</a>
@@ -266,30 +267,24 @@ function DetailScreen({ detail }: DetailScreenProps) {
 
 function Hero() {
   return (
-    <section className="hero-section" aria-labelledby="hero-title">
+    <section
+      className="hero-section"
+      aria-labelledby="hero-title"
+      style={{ '--paper-hero-image': `url(${libraryScreenshot})` } as React.CSSProperties}
+    >
       <div className="hero-bg" aria-hidden="true" />
       <div className="hero-inner">
         <div className="hero-copy">
-          <div className="trust-pills" aria-label="Product qualities">
-            <span>Works offline</span>
-            <span>No sign-in</span>
-            <span>Private on iPhone</span>
-          </div>
           <h1 id="hero-title">paper.trail</h1>
           <p className="hero-kicker">Stop losing important photos in Photos.</p>
           <p className="hero-body">
-            Pull receipts, labels, notes, cards, tickets, and codes out of camera-roll chaos.
-            Find them fast, then remove the originals from Photos after you review.
+            Keep receipts, labels, notes, tickets, and codes searchable on your iPhone — privately
+            and without another account.
           </p>
           <div className="hero-actions">
             <a className="button primary" href="#waitlist">Join Waitlist</a>
             <a className="button secondary" href="#how-it-works">See how it works</a>
           </div>
-        </div>
-        <div className="hero-visual" aria-label="paper.trail app mockups">
-          <Phone variant="library" className="hero-phone-one" />
-          <Phone variant="add" className="hero-phone-two" />
-          <Phone variant="detail" detail="warranty" className="hero-phone-three" />
         </div>
       </div>
     </section>
