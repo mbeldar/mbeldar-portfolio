@@ -23,6 +23,7 @@ import NondFaq from './components/NondFaq';
 import AutoLogs from './components/AutoLogs';
 import AutoLogsLegal from './components/AutoLogsLegal';
 import PaperTrail from './components/PaperTrail';
+import Trips2026 from './components/Trips2026';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -32,6 +33,7 @@ root.render(
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
+        <Route path="/trips-2026" element={<Trips2026 />} />
         <Route path="/paper-trail" element={<PaperTrail />} />
         <Route path="/" element={<PageLayout />}>
           <Route index element={<RootLanding />} />

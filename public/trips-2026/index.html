@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A practical Olympic Peninsula road-trip plan for October 16–18, 2026, with map, timing, weather alternatives, hikes, ferry options, and stay areas."
+    />
+    <title>Olympic Peninsula · Oct 16–18, 2026</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIINfQ3ynhZwHjMZQe2y6vJVMZ7L1q7zJjQ="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to trip plan</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <p class="eyebrow">3 people · car trip · small–medium hikes</p>
+        <h1>Olympic Peninsula field plan</h1>
+        <p class="lede">
+          Friday, Oct 16 → Saturday evening or Sunday afternoon. Start at Edmonds,
+          finish in Seattle.
+        </p>
+        <div class="status-row" aria-label="Current trip status">
+          <span class="status good">Open now: Hurricane Ridge, Hoh &amp; Sol Duc roads</span>
+          <span class="status caution">Recheck Rialto access after Oct 15</span>
+          <span class="status neutral">Sunset: 6:28 Fri · 6:26 Sat</span>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="planner" aria-labelledby="planner-title">
+        <div>
+          <p class="section-kicker">Set the version you want</p>
+          <h2 id="planner-title">Trip controls</h2>
+        </div>
+
+        <div class="control-grid">
+          <fieldset>
+            <legend>Return plan</legend>
+            <div class="segmented" role="group" aria-label="Choose return plan">
+              <button class="toggle active" type="button" data-duration="sat" aria-pressed="true">
+                Saturday night
+              </button>
+              <button class="toggle" type="button" data-duration="sun" aria-pressed="false">
+                Sunday afternoon
+              </button>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Weather mode</legend>
+            <div class="segmented" role="group" aria-label="Choose weather mode">
+              <button class="toggle active" type="button" data-weather="clear" aria-pressed="true">
+                Views / mixed
+              </button>
+              <button class="toggle" type="button" data-weather="wet" aria-pressed="false">
+                Rain / low cloud
+              </button>
+            </div>
+          </fieldset>
+
+          <div class="planner-actions">
+            <button id="copy-plan" class="plain-button" type="button">Copy plan summary</button>
+            <button class="plain-button" type="button" onclick="window.print()">Print</button>
+          </div>
+        </div>
+
+        <p id="plan-summary" class="plan-summary" aria-live="polite"></p>
+      </section>
+
+      <section class="weather-section" aria-labelledby="weather-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Checked Oct 10, 2026 · PDT</p>
+            <h2 id="weather-title">Weather read</h2>
+          </div>
+          <a class="text-link" href="https://www.nps.gov/olym/planyourvisit/current-weather-conditions.htm" target="_blank" rel="noreferrer">
+            Live park weather ↗
+          </a>
+        </div>
+
+        <div class="weather-grid">
+          <article class="weather-card forecast-strong">
+            <p class="weather-place">Friday · Port Angeles</p>
+            <p class="weather-temp">63°F</p>
+            <p>Mostly sunny in the current NWS forecast.</p>
+            <span>Good setup for the north side.</span>
+          </article>
+          <article class="weather-card forecast-strong">
+            <p class="weather-place">Friday · Hurricane Ridge</p>
+            <p class="weather-temp">57°F</p>
+            <p>Mostly sunny forecast at elevation; much colder after sunset.</p>
+            <span>Road can still close with fast weather changes.</span>
+          </article>
+          <article class="weather-card forecast-watch">
+            <p class="weather-place">Saturday · West side</p>
+            <p class="weather-temp">Mixed</p>
+            <p>Extended guidance leans partly cloudy; west-side showers remain plausible.</p>
+            <span>Official NWS horizon did not yet cover Saturday.</span>
+          </article>
+          <article class="weather-card forecast-watch">
+            <p class="weather-place">Sunday · Peninsula</p>
+            <p class="weather-temp">Watch</p>
+            <p>Lower-confidence outlook; some extended guidance introduces light rain.</p>
+            <span>Refresh this plan Wednesday or Thursday.</span>
+          </article>
+        </div>
+
+        <div class="callout">
+          <strong>What the forecast means:</strong> use the mountain window Friday. Forest and waterfall stops
+          improve in light rain; coast stops become optional if wind or surf is rough. Never use a calm inland
+          forecast as a coast-safety forecast.
+        </div>
+      </section>
+
+      <section class="map-section" aria-labelledby="map-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">General orientation</p>
+            <h2 id="map-title">Map &amp; route</h2>
+          </div>
+          <p class="map-note">Lines connect the plan’s stops; they are not turn-by-turn navigation.</p>
+        </div>
+
+        <div class="map-shell">
+          <div id="map" aria-label="Interactive map of the Olympic Peninsula trip"></div>
+          <aside class="map-sidebar" aria-label="Map controls">
+            <h3>Show locations</h3>
+            <div id="map-filters" class="filter-list">
+              <button class="filter active" data-filter="all" type="button">All</button>
+              <button class="filter" data-filter="transit" type="button">Transit</button>
+              <button class="filter" data-filter="mountain" type="button">Mountain</button>
+              <button class="filter" data-filter="forest" type="button">Forest / falls</button>
+              <button class="filter" data-filter="coast" type="button">Coast</button>
+              <button class="filter" data-filter="stay" type="button">Stay areas</button>
+            </div>
+            <div class="map-legend">
+              <p><span class="legend-line primary-line"></span> Primary route</p>
+              <p><span class="legend-line optional-line"></span> Sunday extension</p>
+            </div>
+            <p class="small-copy">
+              Download the NPS app map before leaving Port Angeles. Cell service is unreliable around Lake
+              Crescent, Sol Duc, Hoh, and the beaches.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="itinerary-section" aria-labelledby="itinerary-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Drive estimates include sensible buffers</p>
+            <h2 id="itinerary-title">Timed itinerary</h2>
+          </div>
+          <p class="map-note">Tap any location to find it on the map.</p>
+        </div>
+        <div id="itinerary" class="timeline"></div>
+      </section>
+
+      <section class="choice-section" aria-labelledby="choice-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">The actual trade-off</p>
+            <h2 id="choice-title">Saturday return vs. Sunday return</h2>
+          </div>
+        </div>
+        <div class="comparison" role="table" aria-label="Return plan comparison">
+          <div class="comparison-row comparison-head" role="row">
+            <div role="columnheader"> </div>
+            <div role="columnheader">Saturday night</div>
+            <div role="columnheader">Sunday afternoon</div>
+          </div>
+          <div class="comparison-row" role="row">
+            <div role="rowheader">Pace</div>
+            <div role="cell">Long, committed day; 9–10 hours moving + stops</div>
+            <div role="cell">Balanced; coast at sunset without watching the clock</div>
+          </div>
+          <div class="comparison-row" role="row">
+            <div role="rowheader">What fits</div>
+            <div role="cell">Lake Crescent, Hoh, short coast stop</div>
+            <div role="cell">Same + Sol Duc Falls Sunday</div>
+          </div>
+          <div class="comparison-row" role="row">
+            <div role="rowheader">Stay</div>
+            <div role="cell">Friday only: Port Angeles</div>
+            <div role="cell">Friday: Port Angeles · Saturday: Forks</div>
+          </div>
+          <div class="comparison-row" role="row">
+            <div role="rowheader">My pick</div>
+            <div role="cell">Choose only if you need Sunday back</div>
+            <div role="cell"><strong>Recommended</strong> for a first Olympic visit</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stay-section" aria-labelledby="stay-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Areas, not specific properties</p>
+            <h2 id="stay-title">Where to stay</h2>
+          </div>
+        </div>
+        <div class="stay-grid">
+          <article class="stay-card recommended">
+            <span class="tag">Friday · best base</span>
+            <h3>Port Angeles</h3>
+            <p>Best for Friday’s late Hurricane Ridge window and an early US-101 start Saturday.</p>
+            <ul>
+              <li>Choose the west side of town or near US-101 to save morning time.</li>
+              <li>Most dinner, fuel, and grocery flexibility.</li>
+              <li>About 30–40 minutes to Lake Crescent.</li>
+            </ul>
+            <button class="location-button" data-location="port-angeles" type="button">Show area on map</button>
+          </article>
+          <article class="stay-card recommended">
+            <span class="tag">Saturday · 3-day plan</span>
+            <h3>Forks</h3>
+            <p>Best launch point for the Hoh/coast day and Sunday’s return toward Sol Duc.</p>
+            <ul>
+              <li>Practical, central, and easier for late coast return.</li>
+              <li>Fuel and food are available; evening choices narrow early.</li>
+              <li>Rialto is roughly 20–25 minutes away.</li>
+            </ul>
+            <button class="location-button" data-location="forks" type="button">Show area on map</button>
+          </article>
+          <article class="stay-card">
+            <span class="tag">Quiet alternative</span>
+            <h3>Lake Crescent corridor</h3>
+            <p>Scenic and quiet, but less efficient for Hoh + coast and with fewer evening services.</p>
+            <ul>
+              <li>Good if lake atmosphere matters more than maximum coverage.</li>
+              <li>Keep food and check-in times in mind.</li>
+              <li>Not the best choice for a Saturday-night Seattle return.</li>
+            </ul>
+            <button class="location-button" data-location="lake-crescent" type="button">Show area on map</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="hikes-section" aria-labelledby="hikes-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Small to medium, matched to this route</p>
+            <h2 id="hikes-title">Hike menu</h2>
+          </div>
+        </div>
+        <div class="hike-grid">
+          <article class="hike-card">
+            <div><span class="difficulty easy">Easy</span><span>Friday</span></div>
+            <h3>Big Meadow + Cirque Rim</h3>
+            <p class="stat">0.5–1.0 mi · ~50 ft gain · 30–60 min</p>
+            <p>Short ridge sampler with mountain and Strait overlooks. The right fit for the late arrival.</p>
+            <button class="location-button" data-location="hurricane-ridge" type="button">Map</button>
+          </article>
+          <article class="hike-card">
+            <div><span class="difficulty moderate">Moderate</span><span>Only with time</span></div>
+            <h3>Hurricane Hill</h3>
+            <p class="stat">3.2 mi RT · 645 ft gain · 1.5–2.25 hr</p>
+            <p>Only start by 4:00 pm Friday in clear, dry conditions. Otherwise keep the short ridge walk.</p>
+            <button class="location-button" data-location="hurricane-hill" type="button">Map</button>
+          </article>
+          <article class="hike-card">
+            <div><span class="difficulty easy">Easy</span><span>Saturday</span></div>
+            <h3>Marymere Falls</h3>
+            <p class="stat">1.8 mi RT · modest gain · 60–90 min</p>
+            <p>Old growth and a 90-foot waterfall; an efficient first stop from Port Angeles.</p>
+            <button class="location-button" data-location="marymere" type="button">Map</button>
+          </article>
+          <article class="hike-card">
+            <div><span class="difficulty easy">Easy</span><span>Saturday</span></div>
+            <h3>Hoh short loops</h3>
+            <p class="stat">0.8 + 1.2 mi loops · ~2 hr together</p>
+            <p>Hall of Mosses plus Spruce Nature Trail. Do both if timing is healthy; Hall of Mosses alone if late.</p>
+            <button class="location-button" data-location="hoh" type="button">Map</button>
+          </article>
+          <article class="hike-card">
+            <div><span class="difficulty easy">Easy</span><span>Sunday extension</span></div>
+            <h3>Sol Duc Falls</h3>
+            <p class="stat">1.6 mi RT · 200 ft gain · 60–90 min</p>
+            <p>Compact waterfall hike that is especially good in light rain.</p>
+            <button class="location-button" data-location="sol-duc" type="button">Map</button>
+          </article>
+          <article class="hike-card">
+            <div><span class="difficulty easy">Easy</span><span>Rain fallback</span></div>
+            <h3>Madison Falls</h3>
+            <p class="stat">0.2 mi RT · nearly flat · 15–30 min</p>
+            <p>Low-risk Elwha stop when the ridge is socked in or closes.</p>
+            <button class="location-button" data-location="madison-falls" type="button">Map</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="coast-section" aria-labelledby="coast-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Sea stacks, open water, and zero-to-short walks</p>
+            <h2 id="coast-title">Scenic beaches &amp; coastal stops</h2>
+          </div>
+          <p class="map-note">The first three are the best fit; the others are easy route swaps.</p>
+        </div>
+        <div class="coast-grid">
+          <article class="coast-card coast-pick">
+            <span class="tag">Best drama · primary</span>
+            <h3>Rialto Beach</h3>
+            <p>Rocky shore, giant drift logs, pounding surf, offshore islands, and sea stacks. It needs no destination hike: walk north only as far as daylight and water allow.</p>
+            <p class="stat">Parking-to-beach access · 60–120 min</p>
+            <p class="small-copy">Mora Road is closed through Oct 15; use only after NPS confirms reopening.</p>
+            <button class="location-button" data-location="rialto" type="button">Show on map</button>
+          </article>
+          <article class="coast-card coast-pick">
+            <span class="tag">Easy scenic pairing</span>
+            <h3>First Beach · La Push</h3>
+            <p>Broad Pacific frontage and Quillayute Needles views right by La Push. Use it as a 20–30 minute coastal pull-off before Rialto.</p>
+            <p class="stat">Minimal walking · 20–45 min</p>
+            <p class="small-copy">This is Quileute Reservation land. Follow posted access/parking rules and respect the community.</p>
+            <button class="location-button" data-location="first-beach" type="button">Show on map</button>
+          </article>
+          <article class="coast-card coast-pick">
+            <span class="tag">Best sea stacks · fallback</span>
+            <h3>Ruby Beach</h3>
+            <p>A short forest descent opens onto Abbey Island, driftwood, and classic sea-stack scenery. This is the clean fallback if Rialto access is uncertain.</p>
+            <p class="stat">0.1 mi to beach · 60–90 min</p>
+            <p class="small-copy">The path is short but steep in places; beach-log conditions shift with storms.</p>
+            <button class="location-button" data-location="ruby" type="button">Show on map</button>
+          </article>
+          <article class="coast-card">
+            <span class="tag">Zero-hike overlook</span>
+            <h3>Ediz Hook</h3>
+            <p>A drive-out spit in Port Angeles with harbor, Strait of Juan de Fuca, and Olympic views. Ideal if Friday timing is too tight for a second walk.</p>
+            <p class="stat">Drive-up views · 15–30 min</p>
+            <button class="location-button" data-location="ediz-hook" type="button">Show on map</button>
+          </article>
+          <article class="coast-card">
+            <span class="tag">Strait-side swap</span>
+            <h3>Salt Creek &amp; Crescent Bay</h3>
+            <p>Rocky Tongue Point, open Strait views, sea cliffs, and a crescent of sand. Use it Sunday instead of Sol Duc when the coast is clear and the interior is wet.</p>
+            <p class="stat">Short paths / viewpoints · 45–90 min</p>
+            <p class="small-copy">Tide pools require a genuinely low tide; county gate hours are posted at the entrance.</p>
+            <button class="location-button" data-location="salt-creek" type="button">Show on map</button>
+          </article>
+          <article class="coast-card">
+            <span class="tag">Southern-loop option</span>
+            <h3>Kalaloch + Tree of Life</h3>
+            <p>Wide sandy coast, bluff views, and the famous suspended-root spruce. Add this only if you skip Sol Duc and return to Seattle through Olympia.</p>
+            <p class="stat">Short beach walks · adds substantial driving</p>
+            <p class="small-copy">Not recommended on the Saturday-return version.</p>
+            <button class="location-button" data-location="kalaloch" type="button">Show on map</button>
+          </article>
+        </div>
+        <div class="callout coast-callout">
+          <strong>Saturday tide reality:</strong> La Push low tide is about 11:03 am (~4.7 ft) and high tide about 4:52 pm (~7.1 ft). That makes the afternoon good for scenery, not tide pooling or rounding headlands. Stay on open beach, watch the ocean continuously, and keep off drift logs.
+        </div>
+      </section>
+
+      <section class="ferry-section" aria-labelledby="ferry-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Edmonds ↔ Kingston · ~30-minute crossing</p>
+            <h2 id="ferry-title">Ferry anchors</h2>
+          </div>
+          <a class="text-link" href="https://wsdot.com/ferries/schedule/scheduledetailbyroute.aspx?route=ed-king" target="_blank" rel="noreferrer">
+            Live WSF schedule ↗
+          </a>
+        </div>
+        <div class="ferry-grid">
+          <article>
+            <h3>Outbound Friday</h3>
+            <p class="big-time">12:40 pm</p>
+            <p>Arrive around noon and target this sailing. If the vehicle queue is full, use <strong>1:35 pm</strong>.</p>
+          </article>
+          <article>
+            <h3>Return Saturday</h3>
+            <p class="big-time">8:20 / 9:10 / 9:40 pm</p>
+            <p>The compact plan aims for 8:20 but treats 9:10 or 9:40 as realistic fallbacks.</p>
+          </article>
+          <article>
+            <h3>Return Sunday</h3>
+            <p class="big-time">3:10 / 4:00 / 4:40 pm</p>
+            <p>Leave Sol Duc by about 10:50 am for this window, allowing a meal/fuel buffer.</p>
+          </article>
+        </div>
+        <p class="small-copy ferry-note">
+          Vehicle sailings are first-come, first-served on this route. WSF lists a boarding-pass process at Kingston
+          for vehicles from 8:00 am–8:00 pm. Check alerts and terminal signs the day you travel; arrive 30–45 minutes early.
+        </p>
+      </section>
+
+      <section class="safety-section" aria-labelledby="safety-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Three five-minute checks</p>
+            <h2 id="safety-title">Do this before driving out</h2>
+          </div>
+        </div>
+        <ol class="checklist">
+          <li>
+            <span>1</span>
+            <div>
+              <h3>Friday at 11:00 am</h3>
+              <p>Check the WSF vehicle wait and alerts. If the 12:40 looks unlikely, accept 1:35 immediately.</p>
+              <a href="https://wsdot.com/ferries/vesselwatch/" target="_blank" rel="noreferrer">WSF VesselWatch ↗</a>
+            </div>
+          </li>
+          <li>
+            <span>2</span>
+            <div>
+              <h3>Friday after landing</h3>
+              <p>Call the park road/weather recording: <a href="tel:+13605653131">360-565-3131</a>. Skip the ridge if the road, visibility, or wind is poor.</p>
+              <a href="https://www.nps.gov/olym/planyourvisit/current-road-conditions.htm" target="_blank" rel="noreferrer">NPS road conditions ↗</a>
+            </div>
+          </li>
+          <li>
+            <span>3</span>
+            <div>
+              <h3>Saturday before the coast</h3>
+              <p>Confirm Mora Road/Rialto access. If it has not reopened, use Ruby Beach. Saturday’s La Push low tide is around 11:03 am and not especially low; do not round headlands late in the day.</p>
+              <a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=9442396" target="_blank" rel="noreferrer">NOAA La Push tides ↗</a>
+            </div>
+          </li>
+        </ol>
+        <div class="packing">
+          <h3>Bring in the car</h3>
+          <p>Water, food, headlamps, rain shells, warm layers, dry socks/shoes, traction-friendly footwear, paper/offline map, power bank, first aid, and a full fuel tank. There is no potable water at Hurricane Ridge.</p>
+        </div>
+      </section>
+
+      <section class="sources-section" aria-labelledby="sources-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Research links</p>
+            <h2 id="sources-title">Sources &amp; live checks</h2>
+          </div>
+        </div>
+        <ul class="sources-list">
+          <li><a href="https://www.nps.gov/olym/planyourvisit/conditions.htm" target="_blank" rel="noreferrer">NPS Olympic alerts &amp; conditions</a></li>
+          <li><a href="https://www.nps.gov/olym/planyourvisit/current-road-conditions.htm" target="_blank" rel="noreferrer">NPS current road conditions</a></li>
+          <li><a href="https://www.nps.gov/olym/planyourvisit/tripideas.htm" target="_blank" rel="noreferrer">NPS trip ideas and drive times</a></li>
+          <li><a href="https://www.nps.gov/olym/planyourvisit/exploring-the-coast.htm" target="_blank" rel="noreferrer">NPS exploring the Olympic coast</a></li>
+          <li><a href="https://www.nps.gov/olym/planyourvisit/rialto-beach.htm" target="_blank" rel="noreferrer">NPS Rialto Beach access &amp; safety</a></li>
+          <li><a href="https://forecast.weather.gov/MapClick.php?lat=48.118&amp;lon=-123.431" target="_blank" rel="noreferrer">NWS Port Angeles point forecast</a></li>
+          <li><a href="https://forecast.weather.gov/MapClick.php?lat=47.9696&amp;lon=-123.4971" target="_blank" rel="noreferrer">NWS Hurricane Ridge point forecast</a></li>
+          <li><a href="https://forecast.weather.gov/MapClick.php?lat=47.933&amp;lon=-124.3944" target="_blank" rel="noreferrer">NWS Forks point forecast</a></li>
+          <li><a href="https://wsdot.com/ferries/schedule/scheduledetailbyroute.aspx?route=ed-king" target="_blank" rel="noreferrer">WSF Edmonds–Kingston schedule</a></li>
+          <li><a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=9442396" target="_blank" rel="noreferrer">NOAA La Push tide predictions</a></li>
+        </ul>
+        <p class="source-note">Conditions were checked October 10, 2026. Drive times are planning estimates, not live traffic. Park and ferry status can change.</p>
+      </section>
+    </main>
+
+    <footer>
+      <p>Built as a practical field plan for Oct 16–18, 2026. Leave room for weather; Olympic rewards the flexible.</p>
+    </footer>
+
+    <div id="toast" role="status" aria-live="polite"></div>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
